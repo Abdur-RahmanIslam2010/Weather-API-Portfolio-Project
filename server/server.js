@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 
 app.get('/', async (req, res) => {
-    const data = await fetch("https://api.open-meteo.com/v1/forecast?latitude=30.02&longitude=31&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&hourly=temperature_2m,relative_humidity_2m&timezone=Africa%2FCairo");
+    const data = await fetch("https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&daily=temperature_2m_min,temperature_2m_max,sunset,sunrise,weather_code&hourly=temperature_2m,relative_humidity_2m&timezone=America%2FNew_York");
     const data_json = await data.json();
     await console.log(data_json);
     res.status(200).send(data_json);
