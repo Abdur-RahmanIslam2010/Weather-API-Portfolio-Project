@@ -1,0 +1,47 @@
+.temp-table table, .temp-table tr, .temp-table td {
+    border: 1px solid black;
+}
+
+.temp-table th {
+    border: 3px solid green;
+}
+
+.temp-table tr:nth-child(2n + 2) {
+    background-color: white;
+}
+
+.temp-table {
+    width: fit-content;
+    justify-self: center;
+}
+
+.temp-table h2 {
+    justify-self: center;
+    width: fit-content;
+}
+
+.temp-table div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#left-arrow {
+    background-image: url('http://localhost:8080/icons/left_arrow');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: hsl(0, 0%, 90%);
+}
+
+#right-arrow {
+    background-image: url('http://localhost:8080/icons/right_arrow');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: hsl(0, 0%, 90%);
+}
