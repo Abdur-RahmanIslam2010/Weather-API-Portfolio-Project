@@ -1,0 +1,27 @@
+.daily-table table, .daily-table tr, .daily-table td {
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.daily-table th {
+    border: 3px solid green;
+    padding: 1em;
+}
+
+.daily-table tbody tr:nth-child(2n + 1) {
+    background-color: white;
+}
+
+.daily-table {
+    width: fit-content;
+    margin-top: 50px;
+}
+
+
+.daily-table thead {
+    background-color: hsl(0, 0%, 90%);
+}
+
+.daily-table::-webkit-scrollbar {
+    display: none;
+}
