@@ -45,3 +45,13 @@
     height: 220px;
     overflow: auto;
 }
+
+.data-table thead {
+    position: sticky;
+    top: 0;
+    background-color: hsl(0, 0%, 90%);
+}
+
+.data-table::-webkit-scrollbar {
+    display: none;
+}
