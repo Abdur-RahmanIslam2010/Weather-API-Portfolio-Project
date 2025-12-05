@@ -1,16 +1,21 @@
 import './App.css';
+import DailyTable from './Components/DailyTable/DailyTable';
 import TempTable from './Components/TemperatureTable/Table';
 import WeatherCard from './Components/WeatherCard/Weather';
 import React, { useState, useEffect } from 'react';
 
 function App() {
 
-  const [days, setDay] = useState([]);
+  const [days, setDays] = useState([]);
   const [wmo, setWmo] = useState([]);
   const [time, setTime] = useState([]);
   const [temp, setTemp] = useState([]);
   const [hum, setHum] = useState([]);
   const [index, setIndex] = useState(0);
+  const [minTemp, setMinTemp] = useState([]);
+  const [maxTemp, setMaxTemp] = useState([]);
+  const [sunrise, setSunrise] = useState([]);
+  const [sunset, setSunset] = useState([]);
 
   useEffect(() => {
     async function fetchWeatherData() {
@@ -23,8 +28,12 @@ function App() {
       setTime(hourlyData.time);
       setTemp(hourlyData.temperature_2m);
       setHum(hourlyData.relative_humidity_2m);
-      setDay(dailyData.time);
+      setDays(dailyData.time);
       setWmo(dailyData.weather_code);
+      setMaxTemp(dailyData.temperature_2m_max);
+      setMinTemp(dailyData.temperature_2m_min);
+      setSunrise(dailyData.sunrise.map(day => day.substring(11)));
+      setSunset(dailyData.sunset.map(day => day.substring(11)));
     }
 
     fetchWeatherData();
@@ -110,7 +119,10 @@ function App() {
           <WeatherCard key={i} date={d} weather={getWeatherLabel(wmo[i])} icon={getWeatherIcon(wmo[i])} />
         ))}
       </div>
-      <TempTable date={days[index]} time={weekTimes[index]} temp={weekTemp[index]} hum={weekHum[index]} leftClick={leftTempButtonClick} rightClick={rightTempButtonClick}/>
+      <div className='tables'>
+        <TempTable date={days[index]} time={weekTimes[index]} temp={weekTemp[index]} hum={weekHum[index]} leftClick={leftTempButtonClick} rightClick={rightTempButtonClick}/>
+        <DailyTable days={days} maxTemp={maxTemp} minTemp={minTemp} sunrise={sunrise} sunset={sunset} />
+      </div>
     </div>
   );
 }
