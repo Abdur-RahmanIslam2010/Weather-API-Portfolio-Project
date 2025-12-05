@@ -6,7 +6,7 @@
     border: 3px solid green;
 }
 
-.temp-table tr:nth-child(2n + 2) {
+.temp-table tbody tr:nth-child(2n + 1) {
     background-color: white;
 }
 
@@ -15,12 +15,7 @@
     justify-self: center;
 }
 
-.temp-table h2 {
-    justify-self: center;
-    width: fit-content;
-}
-
-.temp-table div {
+.table-date-heading {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,4 +39,9 @@
     height: 30px;
     border: none;
     background-color: hsl(0, 0%, 90%);
+}
+
+.data-table {
+    height: 220px;
+    overflow: auto;
 }
