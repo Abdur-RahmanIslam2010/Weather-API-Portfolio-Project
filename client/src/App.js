@@ -1,5 +1,6 @@
 import './App.css';
 import DailyTable from './Components/DailyTable/DailyTable';
+import Loading from './Components/Loading/Loading';
 import TempTable from './Components/TemperatureTable/Table';
 import WeatherCard from './Components/WeatherCard/Weather';
 import React, { useState, useEffect } from 'react';
@@ -16,6 +17,7 @@ function App() {
   const [maxTemp, setMaxTemp] = useState([]);
   const [sunrise, setSunrise] = useState([]);
   const [sunset, setSunset] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchWeatherData() {
@@ -34,9 +36,12 @@ function App() {
       setMinTemp(dailyData.temperature_2m_min);
       setSunrise(dailyData.sunrise.map(day => day.substring(11)));
       setSunset(dailyData.sunset.map(day => day.substring(11)));
-    }
 
+      setIsLoading(false);
+    }
+    
     fetchWeatherData();
+
   }, []);
 
   const day1Times = time.slice(0, 24).map(day => day.substring(11));
@@ -113,19 +118,24 @@ function App() {
       setIndex(0);
     }
   }
-  return (
-    <div className="App">
-      <div className='weather-cards-container'>
-        {days.map((d, i) => (
-          <WeatherCard key={i} date={d} weather={getWeatherLabel(wmo[i])} icon={getWeatherIcon(wmo[i])} />
-        ))}
+
+  if (isLoading === true) {
+    return (<Loading />);
+  } else {
+    return (
+      <div className="App">
+        <div className='weather-cards-container'>
+          {days.map((d, i) => (
+            <WeatherCard key={i} date={d} weather={getWeatherLabel(wmo[i])} icon={getWeatherIcon(wmo[i])} />
+          ))}
+        </div>
+        <div className='tables'>
+          <TempTable date={days[index]} time={weekTimes[index]} temp={weekTemp[index]} hum={weekHum[index]} leftClick={leftTempButtonClick} rightClick={rightTempButtonClick}/>
+          <DailyTable days={days} maxTemp={maxTemp} minTemp={minTemp} sunrise={sunrise} sunset={sunset} />
+        </div>
       </div>
-      <div className='tables'>
-        <TempTable date={days[index]} time={weekTimes[index]} temp={weekTemp[index]} hum={weekHum[index]} leftClick={leftTempButtonClick} rightClick={rightTempButtonClick}/>
-        <DailyTable days={days} maxTemp={maxTemp} minTemp={minTemp} sunrise={sunrise} sunset={sunset} />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
