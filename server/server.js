@@ -33,13 +33,10 @@ app.get('/icons/:icon', (req, res) => {
     };
     res.sendFile(icons[icon]);
 });
-if (!process.env.VERCEL) {
-    app.listen(port, (err) => {
-        if (err) throw err;
-        else {
-            console.log(`Server started and is listening at http://localhost:${port}`);
-        }
-    });
-}
 
-module.exports = app;
+app.listen(port, (err) => {
+    if (err) throw err;
+    else {
+        console.log(`Server started and is listening at http://localhost:${port}`);
+    }
+});
